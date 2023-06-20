@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+  <title>Multiple Choice Coding Quiz</title>
+</head>
+<body>
+  <h1>Coding Quiz</h1>
+  <div id="quiz-container">
+    <h2 id="question"></h2>
+    <ul id="choices"></ul>
+  </div>
+
+  <script>
+    const questions = [
+    {
+        question: "A(n) _____ is a data structure consisting of a collection of elements.",
+        choices: ["String", "Object", "Boolean", "Array"],
+        answer: 3
+      },
+    {
+        question: "_____ is an object-oriented computer programming lanuage commonly used to create interactive effects within web browsers.?",
+        choices: ["Python", "Javascript", "CSS", "VSCode"],
+        answer: 1
+      },
+    {
+        question: "_____ is the study of computers and computational systems.",
+        choices: ["Coding", "Debugging", "Computer Science", "Styling"],
+        answer: 2
+      },
+    {
+        question: "_____ is the process of writing computer programs.",
+        choices: ["Reading", "Programming", "Parse", "DOM"],
+        answer: 1
+      },
+    {
+        question: "Which programming language is commonly used for web development?",
+        choices: ["JavaScript", "Java", "Python", "C++"],
+        answer: 0
+    }];
+
+    const quizContainer = document.getElementById("quiz-container");
+    const questionElement = document.getElementById("question");
+    const choicesContainer = document.getElementById("choices");
+
+    let currentQuestion = 0;
+
+    function showQuestion() {
+      const question = questions[currentQuestion];
+      questionElement.textContent = question.question;
+
+      choicesContainer.innerHTML = "";
+      for (let i = 0; i < question.choices.length; i++) {
+        const choice = document.createElement("li");
+        choice.textContent = question.choices[i];
+        choice.onclick = function() {
+          checkAnswer(i);
+        };
+        choicesContainer.appendChild(choice);
+      }
+    }
+
+    function checkAnswer(selectedIndex) {
+      const question = questions[currentQuestion];
+      if (selectedIndex === question.answer) {
+        alert("Correct!");
+      } else {
+        alert("Incorect. The correct answer is: " + question.choices[question.answer]);
+      }
+
+      currentQuestion++;
+
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function finishQuiz() {
+      quizContainer.innerHTML = "<h2>Quiz Complete!</h2>";
+    }
+
+    showQuestion();
+  </script>
+</body>
+</html>
